@@ -130,3 +130,11 @@ Include CCapi.php in your code and then you can request CC server like:
   - **params** : associative array of data e.g. `{"id" => 75, "name" => "glasgow"}`.
   - **ccapikey** : If you want to send api key rather than adding it in the `api-key.txt` file.
 
+### Culture Counts API endpoints
+
+You can check the different endpoints available by browsing the root of our API:
+
+https://culturecounts.cc/api/
+
+Following the clickable links there for more API details.
+
