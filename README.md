@@ -130,6 +130,19 @@ Include CCapi.php in your code and then you can request CC server like:
   - **params** : associative array of data e.g. `{"id" => 75, "name" => "glasgow"}`.
   - **ccapikey** : If you want to send api key rather than adding it in the `api-key.txt` file.
 
+### Querystring passing
+
+If you need to pass some parameter through the user's survey to receive back at your redirect endpoint you can do this by appending arbitrary querystring parameters to the survey URL.
+
+So e.g. if the survey URL is:
+https://culturecounts.cc/s/ewFE3
+
+You can send the user to:
+https://culturecounts.cc/s/ewFE3?my_token=XXXXXX
+
+When the user is redirected back to your site the same token will get appended:
+https://your-site.com/?my_token=XXXXXX
+
 ### Culture Counts API endpoints
 
 You can check the different endpoints available by browsing the root of our API:
