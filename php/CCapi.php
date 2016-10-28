@@ -1,10 +1,13 @@
-<?php 
+<?php
 
+$GLOBALS['config'] = include_once('config.php'); 
+session_set_cookie_params(0);
 session_start();
 
 function cclogin($apikey) {
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, "http://localhost:8000/api/auth/login/");
+	$url = $GLOBALS['config']['host']."/api/auth/login/";
+	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36');
 	curl_setopt($ch, CURLOPT_POST, true);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, "apikey=".$apikey);
@@ -42,7 +45,6 @@ function  requestCC($url, $request_type ,$params=false, $ccapikey=false){
 	}elseif($request_type == "post"){
 		$post_request = true;
 	}
-
 	if(!isset($_SESSION['ch']) || empty($_SESSION['cc'])) {
 		cclogin($ccapikey);
 	}
