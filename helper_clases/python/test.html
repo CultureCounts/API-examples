@@ -1,0 +1,116 @@
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Required</th>
+            <th>Readonly</th>
+            <th>Unique</th>
+            <th>Type</th>
+            <th>Choices</th>
+            <th>Default Value</th>
+            <th>Description / Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>True</td>
+            <td>True</td>
+            <td>True</td>
+            <td>int</td>
+            <td>-</td>
+            <td>auto increment</td>
+            <td>pk of the user model</td>
+        </tr>
+        <tr>
+            <td>tombstate</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>Choice</td>
+            <td>None, "archived", "deleted"</td>
+            <td>None</td>
+            <td>current object state,</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>True</td>
+            <td>False</td>
+            <td>True</td>
+            <td>email</td>
+            <td>-</td>
+            <td>-</td>
+            <td>email id of the user</td>
+        </tr>
+        <tr>
+            <td>is_active</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>Boolean</td>
+            <td>True, False</td>
+            <td>True</td>
+            <td>current user is active or inactive</td>
+        </tr>
+        <tr>
+            <td>names</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>Array</td>
+            <td>-</td>
+            <td>["", ""]</td>
+            <td>first name and last name are added like ["jhon", "Doe"]</td>
+        </tr>
+        <tr>
+            <td>settings</td>
+            <td>Flase</td>
+            <td>False</td>
+            <td>False</td>
+            <td>Json</td>
+            <td>-</td>
+            <td>{}</td>
+            <td>Settings of user</td>
+        </tr>
+        <tr>
+            <td>roles</td>
+            <td>False</td>
+            <td>For most users</td>
+            <td>False</td>
+            <td>Array</td>
+            <td>Superuser, Admin, Apikey_, Anonymous</td>
+            <td>[]</td>
+            <td>Defines capabilties of a user</td>
+        </tr>
+        <tr>
+            <td>organisations</td>
+            <td>False</td>
+            <td>True</td>
+            <td>False</td>
+            <td>Array</td>
+            <td>-</td>
+            <td>-</td>
+            <td>organisations current user is part of</td>
+        </tr>
+        <tr>
+            <td>created</td>
+            <td>False</td>
+            <td>False</td>
+            <td>False</td>
+            <td>datetime</td>
+            <td>-</td>
+            <td>current time</td>
+            <td>Time at which object was created</td>
+        </tr>
+        <tr>
+            <td>modified</td>
+            <td>False</td>
+            <td>True</td>
+            <td>False</td>
+            <td>datetime</td>
+            <td>-</td>
+            <td>current time</td>
+            <td>Time at which object was modified</td>
+        </tr>
+    </tbody>
+</table>

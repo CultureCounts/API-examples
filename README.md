@@ -129,7 +129,7 @@ curl -i -H "Accept: application/json" -H "authtoken: ws4ediybhi6j3feryc5bgcq7i06
 ```
 
 You need to add auth token in each request header else request will not be considered from active user.
-Authtoken and csrftoken can be fetched by requesting on `/api/auth/status/`
+Authtoken can be fetched by requesting on `/api/auth/status/`
 
 Auth status will return same response that we get after login request:
 
@@ -181,7 +181,7 @@ APIkey user can do 4 types of request to a culture counts api endpoint.
 | Edit | PUT Request Method  |
 | Delete | DELETE Request Method  |
 
-####  GET Request
+####  GET Request Query Parameters
 
 User can fetch data using 3 type of queries:
 
@@ -203,24 +203,35 @@ User can fetch data using 3 type of queries:
 
 ####  POST Request
 
+POST request requirements:
+
+1) URL : URL of api request like `https://gaurav.new-dev.culturecounts.cc/api/user/`
+2) Payload : Data you want to add like name of evaluation, survey etc.
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/satatus/` or from login response.
+
 ####  PUT Request
 
+1) URL : URL of api request like `https://gaurav.new-dev.culturecounts.cc/api/user/<ID>/`
+2) ID : Id of the object you want to edit
+3) Payload : Data you want to change like name of evaluation, survey etc.
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/satatus/` or from login response.
+
+  Without these headers you won't be able to PUT requests to the culture counts api
+
 ####  DELETE Request
+
+1) URL : URL of api request like `https://gaurav.new-dev.culturecounts.cc/api/user/<ID>/`
+2) ID : Id of the object you want to edit
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/satatus/` or from login response.
 
 
 ### CultureCounts api endpoints
 
-* **Auth**
-* **Users**
-* **Organisation**
-* **Evaluation**
-* **Survey**
-* **Share**
-* **Question**
-* **Slughash**
-* **Survey Response**
-* **Question Response**
-* **Datafacts**
-* **Dimension**
-* **Dimension Category**
+Info about culture counts api endpoints are [here](https://github.com/CultureCounts/API-examples/blob/master/Api-docs.md)
  
