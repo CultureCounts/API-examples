@@ -1,68 +1,117 @@
 <?php
 
-$GLOBALS['config'] = include_once('config.php'); 
-session_set_cookie_params(0);
-session_start();
+$GLOBALS['config'] = include_once('config.php');
 
-function cclogin($apikey) {
-	$ch = curl_init();
-	$url = $GLOBALS['config']['host']."/api/auth/login/";
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_USERAGENT,'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/32.0.1700.107 Chrome/32.0.1700.107 Safari/537.36');
-	curl_setopt($ch, CURLOPT_POST, true);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, "apikey=".$apikey);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_COOKIESESSION, true);
-	curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');  //could be empty, but cause problems on some hosts
-	curl_setopt($ch, CURLOPT_COOKIEFILE, '/var/www/ip4.x/file/tmp');  //could be empty, but cause problems on some hosts
-	$answer = json_decode(curl_exec($ch));
-	$_SESSION['csrf'] = $answer->csrftoken;
-	$_SESSION['ch'] = $ch;
-	$_SESSION['user'] = $answer->user;
-	if (curl_error($ch)) {
-	    echo curl_error($ch);
-	}
+
+class CCRequest {
+
+    public function __construct($apikey=null){
+        $this->csrftoken = "";
+        $this->authtoken = "";
+
+        if (!$apikey){
+        	$apikey = $GLOBALS['config']['APIKEY'];
+        }
+        $this->apikey = $apikey;
+        $this->host = $GLOBALS['config']['HOST'];
+        $this->auth_models = $GLOBALS['config']['AUTH_MODELS'];
+    }
+
+    public function callAPI($method, $url, $data = false){
+        $curl = curl_init();
+
+        switch ($method){
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            default:
+                $url = $url;
+        }
+
+        // OPTIONS:
+        //
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'X-CSRFToken:'.$this->csrftoken,
+            'authtoken:'.$this->authtoken,
+        ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+        // EXECUTE:
+        $result = curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if(!$result){die("Connection Failure");}
+        curl_close($curl);
+
+        return array("data" => json_decode($result, true), "status" => $httpcode);
+    }
+
+    public function ccURL($model, $id=false, $queryset=false){
+
+        $url = "";
+
+    	if (in_array($model, $this->auth_models)){
+    		$url = "/auth/".$model."/";
+    	} else {
+            if ($id) {
+                $url = "/".$model."/".$id."/";
+            } else {
+                $url = "/".$model."/";
+            }
+        }
+        if($queryset){
+            $url = $url."?".http_build_query($queryset, '', '&');
+        }
+
+        return $this->host.$url;
+    }
+
+    public function get($model, $id = false, $queryset = false){
+        $url = $this->ccURL($model, $id, $queryset);
+        $get_data = $this->callAPI('GET', $url);
+        return json_encode($get_data, true);
+    }
+
+    public function post($model, $payload){
+        $url = $this->ccURL($model);
+        $post_data = $this->callAPI('POST', $url, $payload);
+        return json_encode($post_data, true);
+    }
+
+    public function put($model, $id, $payload){
+        $url = $this->ccURL($model, $id);
+        $put_data = $this->callAPI('PUT', $url, $payload);
+        return json_encode($put_data, true);
+    }
+
+    public function delete($model, $id){
+        $url = $this->ccURL($model, $id);
+        $delete_data = $this->callAPI('DELETE', $url);
+        return $json_encod(edelete_data, true);
+    }
+
+    public function login(){
+        $payload = array(
+            "apikey" => $this->apikey
+        );
+
+        $response1 = $this->post("login", $payload);
+        $response = json_decode($response1, true);
+        if ($response['status'] == 200){
+            $data = $response["data"];
+            $this->authtoken = $data["token-id"];
+            $this->csrftoken = $data["csrftoken"];
+        }
+        return $response1;
+    }
 
 }
-
-function getApiKey(){
-	$myfile = fopen("api-key.txt", "r") or die("Unable to open file!");
-	return fread($myfile, filesize("api-key.txt"));
-	fclose($myfile);
-}
-
-function  requestCC($url, $request_type ,$params=false, $ccapikey=false){
-
-	if (!$ccapikey){
-		$ccapikey = getApiKey();
-	}
-
-	if($request_type == "get"){
-		$post_request = false;
-		if ($params){
-			$url = $url."?".http_build_query($params);
-		}
-	}elseif($request_type == "post"){
-		$post_request = true;
-	}
-	if(!isset($_SESSION['ch']) || empty($_SESSION['cc'])) {
-		cclogin($ccapikey);
-	}
-	$ch = $_SESSION['ch'];
-
-	curl_setopt($ch, CURLOPT_URL, $url);
-	curl_setopt($ch, CURLOPT_POST, $post_request);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    	'X-CSRFToken:'.$_SESSION['csrf'],
-    ));
-    if ($params & $request_type=="post"){
-    	curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params) );
-	}
-	$response = curl_exec($ch);
-	if (curl_error($_SESSION['ch'])) {
-	    echo curl_error($ch);
-	}
-	return $response;
-}
-
-?>

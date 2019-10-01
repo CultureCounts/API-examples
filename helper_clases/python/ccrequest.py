@@ -18,7 +18,6 @@ class CCRequest:
         self.headers = {
             "Accept" : "application/json",
             "Content-Type" : "application/json",
-            # "Referer": c.BASE_URL,
             "authtoken": "d1ul0ym8jkpruchlszvg9ovfl95ucyi4"
         }
 
