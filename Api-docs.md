@@ -1,12 +1,12 @@
-# Culture Counts api endpoints
+# Culture Counts API endpoints
 
-Culture counts have multiple api endpoints for fetcing, creating & editing data.
+Culture counts have multiple API endpoints for fetching, creating & editing data.
 Api endpoints with specifications are listed below.
 
 
-## Auth api endpoints
+## Auth API endpoints
 
-Auth  api endpoints are used for api authorisations, status & setting up context
+Auth API endpoints are used for API authorizations, status & setting up context
 
 - **Login** : 
  Api endpoint is used for logging in apikey.
@@ -123,7 +123,7 @@ Data api endpoints are used to view, add & edit culture counts data.
 
 #### Common Fields
 
-Every api model have some common Fields that is added in each api endpoint.
+Every API model have some common Fields that is added in each API endpoint.
   	<table>
 	  <tr>
 	    <th>Field</th>
@@ -144,7 +144,7 @@ Every api model have some common Fields that is added in each api endpoint.
 	    <td>pk of the model</td>
 	  </tr>
 	  <tr>
-	    <td>tombsate</td>
+	    <td>tombstate</td>
 	    <td>-</td>
 	    <td>-</td>
 	    <td>-</td>
@@ -183,7 +183,7 @@ Every api model have some common Fields that is added in each api endpoint.
 
 #### Common GET request query parameters
 
-Every api endpoint have some common get request query parameters.
+Every API endpoint have some common get request query parameters.
 	<table>
 	    <tr>
 	      <th>Name</th>
@@ -239,7 +239,7 @@ Every api endpoint have some common get request query parameters.
         <tr>
           <td>GET</td>
           <td>:heavy_check_mark:</td>
-          <td>View all users of the apikey's organisation</td>
+          <td>View all users of the Apikey's organisation</td>
         </tr>
         <tr>
           <td>POST</td>
@@ -315,16 +315,16 @@ Every api endpoint have some common get request query parameters.
           <td>-</td>
           <td>Array<br></td>
           <td>[]</td>
-          <td>Defines capabilties of a user</td>
+          <td>Defines capabilities of a user</td>
         </tr>
         <tr>
-          <td>organisations</td>
+          <td>org</td>
           <td>-</td>
           <td>True</td>
           <td>-</td>
           <td>Array</td>
           <td>[]</td>
-          <td>current user organsiations</td>
+          <td>current user organisations</td>
         </tr>
       </table>
 
@@ -348,13 +348,13 @@ Every api endpoint have some common get request query parameters.
         </tr>
       </table>
 
-	- Sub api endpoints
+	- Sub API endpoints
 
 		- **Assessors**
 
 			Api endpoint to add or remove assessors from a survey.
 			Assessors are users which can be differentiated by the system while checking responses.
-			A user is added as a assessor by survey administrator or admin user with enough privledges to edit survey.
+			A user is added as a assessor by survey administrator or admin user with enough privileges to edit survey.
 			Unique slugs are added to assessors and these slugs are used to take surveys.
 
 			Types of assessors: Self, Peer
@@ -481,7 +481,7 @@ Every api endpoint have some common get request query parameters.
 		          <td>-</td>
 		          <td>Array</td>
 		          <td>[]</td>
-		          <td>current user organsiations</td>
+		          <td>current user organisations</td>
 		        </tr>
 		        <tr>
 		          <td>respondent_category</td>
@@ -538,12 +538,12 @@ Every api endpoint have some common get request query parameters.
 				]
 				</code>
 
-				Multiple assessors can be added or removed from a single api call.
+				Multiple assessors can be added or removed from a single API call.
 
 		- **Find**
 
 			There are cases when user has to find another user to add them to evaluation or organisation.
-			In that case you can use find user suburl that filters out user by email that does not belong to current organisation
+			In that case you can use find user sub url that filters out user by email that does not belong to current organisation.
 			- Request Methods allowed:
 				<table>
 			        <tr>
@@ -620,17 +620,17 @@ Every api endpoint have some common get request query parameters.
 		          <td>-</td>
 		          <td>Array</td>
 		          <td>[]</td>
-		          <td>Defines capabilties of a user</td>
+		          <td>Defines capabilities of a user</td>
 		        </tr>
 		      </table>
 
-		    - How to use find sub api endpoint:
+		    - How to use find Sub API endpoint:
 
 		    	To use find you have add query parameter `email` to `/api/user/find/`
 
 		    	Example:
 	    		<code>
-	    		https://gaurav.new-dev.culturecounts.cc//api/user/find/?email=gauravgoyal1092@gmail.com
+	    		https://gaurav.new-dev.culturecounts.cc/api/user/find/?email=gauravgoyal1092@gmail.com
 	    		</code>
 
 - **Organisation**
@@ -657,7 +657,7 @@ Every api endpoint have some common get request query parameters.
         <tr>
           <td>PUT</td>
           <td>:heavy_check_mark:</td>
-          <td>Can edit organsiation only if added to Apikey_superuser role</td>
+          <td>Can edit organisations only if added to Apikey_superuser role</td>
         </tr>
         <tr>
           <td>DELETE</td>
@@ -986,7 +986,7 @@ Every api endpoint have some common get request query parameters.
 
       		This is a Json type field that holds multiple types of survey options for survey details:
 
-      		- **active**: Legacy field, Nnot used any more. 
+      		- **active**: Legacy field, Not used any more. 
       		- **survey_intro**: Short optional introduction to the survey. This will appear on the first page of your survey. 
       		- **start**: Survey starting date determine when your survey begins
       		- **close**: Survey starting date determine when your survey stops
@@ -1012,7 +1012,7 @@ Every api endpoint have some common get request query parameters.
 
     - Sub Api Endpoints
     	- **Change Logo**
-    		This api endpoint lets user upload logo of a survey.
+    		This API endpoint lets users upload logo of a survey.
     		Logo is type of custom branding for an organisation as your logo will show up on the surveys welcome screen with survey intro.
     		Your logo file must be smaller than 2MB and be in one of the following formats:
 				`.png.gif or .jpg`
@@ -1038,7 +1038,7 @@ Every api endpoint have some common get request query parameters.
 			        <tr>
 			          <td>PUT</td>
 			          <td>:heavy_check_mark:</td>
-			          <td>Allows to add/change logo with appropriate suvrey edit permissions</td>
+			          <td>Allows to add/change logo with appropriate survey edit permissions</td>
 			        </tr>
 			        <tr>
 			          <td>DELETE</td>
@@ -1079,7 +1079,7 @@ Every api endpoint have some common get request query parameters.
 
  	Api endpoint to view, add, edit & delete Shares.
 
- 	Shares is only way that connects user & organisation to Evaluations and surveys.
+ 	Shares is the only way that connects user & organisation to Evaluations and surveys.
  
     - Request Methods Allowed:
       <table>
@@ -1192,26 +1192,26 @@ Every api endpoint have some common get request query parameters.
     - Fields Description:
 
     	- Relationship Types:
-	 		- Creator : Have all permissions to edit survey and can also create another creater type share
+	 		- Creator : Have all permissions to edit survey and can also create another creator type share
 	 		- Admin : Have all permissions to edit survey but can only edit editor and viewer type shares
 	 		- Editor : Have some permissions to edit survey and can only edit viewer type shares
 	 		- Viewer : Can only view survey and survey details
 
 	 	- Sharer Types:
-	 		- user : share tareget evaluation/survey/customreport with user
-	 		- organisation : share tareget evaluation/survey/customreport with orgaisation
+	 		- user : share target evaluation/survey/customreport with user
+	 		- organisation : share target evaluation/survey/customreport with organisation
 
 	 	- Target Types:
-	 		- evaluation : user/organisation will get access to all survey's of shared evaluation
-	 		- suvrey : user/organisation will get access to a specific survey data
+	 		- evaluation : user/organisation will get access to all surveys of shared evaluation
+	 		- survey : user/organisation will get access to a specific survey data
 	 		- customreport : user/organisation will get access to a specific custom minisite report data
 
 	 	- Tips:
-	 		- Targret and sharer are required when creating a share.
-	 		- While editing target & sharer fileds are Non editable.
+	 		- Target and sharer are required when creating a share.
+	 		- While editing target & sharer fields are Non editable.
 	 		- If you wish to change sharer or target then archive or delete current user share and create new share.
 	 		- To archive share change tombstate of share to archived
-	 		- To Delete share change tombstate of send a DELETE request to share api endpoint with valud share id.
+	 		- To Delete share change tombstate of send a DELETE request to share API endpoint with valid share id.
 	 		- sharer and target contains 2 sub types : id & type, In case of user as a sharer `sharer_type` will be `user` & `sharer_id` will be `<current_user_id>`. Same goes for target `object_type` will be `evaluation or survey or customreport` and object_id will be `<target_id>` 
 
     - Get Request Query Filters:
@@ -1393,7 +1393,7 @@ Every api endpoint have some common get request query parameters.
 
     	- **Options**
 
-    		- required : If question is madatory to answer
+    		- required : If question is mandatory to answer
     		- page
     		- choices : Choices of the question input type : dropdown, multiselect and multiplechoice
     		- child : sub question id
@@ -1559,7 +1559,7 @@ Every api endpoint have some common get request query parameters.
     - Get Request Query Filters:
     <table>
         <tr>
-          <th>Namr</th>
+          <th>Name</th>
           <th>Example</th>
           <th>Description</th>
         </tr>
@@ -1743,7 +1743,7 @@ Every api endpoint have some common get request query parameters.
         </tr>
       </table>
   
-    - URL : `/api/questionrespone/`
+    - URL : `/api/questionresponse/`
   
     - Fields :
     
@@ -1800,7 +1800,7 @@ Every api endpoint have some common get request query parameters.
           <td>-</td>
           <td>int</td>
           <td>-</td>
-          <td>to edit response you have tp update version of the object.</td>
+          <td>to edit response you have to update version of the object.</td>
         </tr>
       </table>
 
@@ -1813,22 +1813,22 @@ Every api endpoint have some common get request query parameters.
         </tr>
         <tr>
           <td>survey_response_id</td>
-          <td>`/api/questionrespone/?survey_response_ider_id=1`</td>
+          <td>`/api/questionresponse/?survey_response_ider_id=1`</td>
           <td>Filter responses by survey response</td>
         </tr>
         <tr>
           <td>question_id</td>
-           <td>`/api/questionrespone/?question_id=1`</td>
+           <td>`/api/questionresponse/?question_id=1`</td>
           <td>Filter responses by question</td>
         </tr>
         <tr>
           <td>evaluation</td>
-          <td>`/api/questionrespone/?evaluation=1`</td>
+          <td>`/api/questionresponse/?evaluation=1`</td>
           <td>Filter responses by evaluation</td>
         </tr>
         <tr>
           <td>survey</td>
-          <td>`/api/questionrespone/?survey=1`</td>
+          <td>`/api/questionresponse/?survey=1`</td>
           <td>Filter responses by survey</td>
         </tr>
       </table>
