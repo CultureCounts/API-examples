@@ -11,17 +11,17 @@ Please contact  [culture counts administrators](https://culturecounts.cc/contact
 Apikey is linked to an organisation and a user.
 It can only access, create or edit data that belongs to its organisation.
 
-Apikey have multiple type of capabilities or in api it's specified as current user roles. Permissions granted to any user depends upon these roles. 
+Apikey have multiple types of capabilities that are specified as current user roles. Permissions granted to any user depends upon these roles. 
 
-Apikey has 5 type of capabilities/roles:
-1) **Read** - It's specified as `Apikey_view` role. It states that apikey should be able to read organisation related data from culture counts api.
+Apikey capabilities/roles:
+1) **Read** - It's specified as `Apikey_view` role. It states that apikey should be able to read organisation related data from culture counts API.
 
-2) **Write** - It's specified as `Apikey_add` role. It states that apikey should be able to add organisation related data from culture counts api.
+2) **Write** - It's specified as `Apikey_add` role. It states that apikey should be able to add organisation related data from culture counts API.
 ex : Creating evaluation, survey & checking responses
 
-2) **Edit** - It's specified as `Apikey_edit` role. It states that apikey should be able to edit organisation related data from culture counts api.
+2) **Edit** - It's specified as `Apikey_edit` role. It states that apikey should be able to edit organisation related data from culture counts API.
 
-4) **Delete** - It's specified as `Apikey_delete` role. It states that apikey should be able to delete organisation related data from culture counts api.
+4) **Delete** - It's specified as `Apikey_delete` role. It states that apikey should be able to delete organisation related data from culture counts API.
 
 5) **Superuser** - It's specified as `Apikey_superuser` role. It states that superuser apikey should be able to so some things that are only granted to special users like adding users to organisation, editing organisation details or can edit survey responses.
 
@@ -57,9 +57,9 @@ CURL request breakdown:
   - apikey : 4GPxY2qN9EdBgVo1XoCJsaXU9fGm
 ```
 
-#### Api Response
+#### API Response
 
-Api response will be in JSON Format.
+API response will be in JSON Format.
 A successful authentication response looks like:
 
 ```
@@ -110,17 +110,17 @@ Response breakdown:
 
 - csrftoken : Security token required for authorization
 
-- organisation_context : Apikey organsisation details
+- organisation_context : Apikey organisation details
     - name : Name of the organisation
 
-- token-id : AuthToken that you will require for api authorization.
+- token-id : AuthToken that you will require for API authorization.
 ```
 
 
 ###  Apikey AuthToken
 
-Apikey AuthToken is required to validate api session.
-You need to add auth token in request headers to do successful api requests.
+Apikey AuthToken is required to validate API session.
+You need to add auth token in request headers to do successful API requests.
 
 CURL Request Example for getting auth status:
 
@@ -129,9 +129,9 @@ curl -i -H "Accept: application/json" -H "authtoken: ws4ediybhi6j3feryc5bgcq7i06
 ```
 
 You need to add auth token in each request header else request will not be considered from active user.
-Authtoken and csrftoken can be fetched by requesting on `/api/auth/status/`
+Authtoken can be fetched by requesting on `/api/auth/status/`
 
-Auth status will return same response that we get after login request:
+Auth status will return the same response that we get after login request:
 
 ```
 {
@@ -169,10 +169,10 @@ Auth status will return same response that we get after login request:
 ```
 
 
-### Request to api endpoints
+### Request to API endpoints
 
 #### Request Types
-APIkey user can do 4 types of request to a culture counts api endpoint.
+APIkey user can do 4 types of request to a culture counts API endpoint.
 
 | Request Type | Request Method |
 |--|--|
@@ -181,7 +181,7 @@ APIkey user can do 4 types of request to a culture counts api endpoint.
 | Edit | PUT Request Method  |
 | Delete | DELETE Request Method  |
 
-####  GET Request
+####  GET Request Query Parameters
 
 User can fetch data using 3 type of queries:
 
@@ -203,24 +203,35 @@ User can fetch data using 3 type of queries:
 
 ####  POST Request
 
+POST request requirements:
+
+1) URL : URL of API request like `https://gaurav.new-dev.culturecounts.cc/api/user/`
+2) Payload : Data you want to add like name of evaluation, survey etc.
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/status/` or from login response.
+
 ####  PUT Request
+
+1) URL : URL of API request like `https://gaurav.new-dev.culturecounts.cc/api/user/<ID>/`
+2) ID : Id of the object you want to edit
+3) Payload : Data you want to change like name of evaluation, survey etc.
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/status/` or from login response.
+
+  Without these headers you won't be able to PUT requests to the culture counts API
 
 ####  DELETE Request
 
+1) URL : URL of API request like `https://gaurav.new-dev.culturecounts.cc/api/user/<ID>/`
+2) ID : Id of the object you want to edit
+3) Headers : Required headers to do post request
+  * `Content-Type` : `application/json`
+  * `authtoken`:  you can `authtoken` from `/api/auth/status/` or from login response.
 
-### CultureCounts api endpoints
 
-* **Auth**
-* **Users**
-* **Organisation**
-* **Evaluation**
-* **Survey**
-* **Share**
-* **Question**
-* **Slughash**
-* **Survey Response**
-* **Question Response**
-* **Datafacts**
-* **Dimension**
-* **Dimension Category**
+### CultureCounts API endpoints
+
+Info about culture counts API endpoints are [here](https://github.com/CultureCounts/API-examples/blob/master/Api-docs.md)
  
