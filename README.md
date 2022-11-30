@@ -4,7 +4,7 @@ To use the Culture Counts API you must have an API key. The API key is a unique 
 
 Authentication with an API key avoids needing to store your culture counts password or other credential information on your machine. API keys have security benefits over passwords (they are tied to a specific organisation & user, they're usually configured to expire, and they can be revoked), but a valid API key provides complete access to your data and actions, so it should be kept secret.
 
-Please contact  [culture counts administrators](https://culturecounts.cc/contact/?topic=support) to get an API key for your organisation.
+API Keys are only available for internal use currently. Contact [culture counts administrators](https://culturecounts.cc/contact/) to get an API key for yourself.
 
 ## Apikey Data model
 
